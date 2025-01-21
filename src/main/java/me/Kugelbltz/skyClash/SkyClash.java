@@ -4,6 +4,7 @@ import me.Kugelbltz.skyClash.commands.Choose;
 import me.Kugelbltz.skyClash.commands.SCAdmin;
 import me.Kugelbltz.skyClash.player.ClassManagement;
 import me.Kugelbltz.skyClash.player.PlayerRegenerativeStats;
+import me.Kugelbltz.skyClash.playerdata.PlayerData;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -30,6 +31,7 @@ public final class SkyClash extends JavaPlugin {
         plugin=this;
         setFields();
         saveDefaultConfig();
+
     }
 
     private void setFields(){
@@ -41,6 +43,8 @@ public final class SkyClash extends JavaPlugin {
 
         getCommand("choose").setExecutor(new Choose());
         getCommand("skyclashadmin").setExecutor(new SCAdmin());
+
+        new PlayerData();
     }
 
     @Override

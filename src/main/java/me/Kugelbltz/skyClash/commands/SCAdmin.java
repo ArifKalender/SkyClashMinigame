@@ -1,5 +1,6 @@
 package me.Kugelbltz.skyClash.commands;
 
+import me.Kugelbltz.skyClash.playerdata.PlayerData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,7 +21,10 @@ public class SCAdmin implements CommandExecutor {
             if(strings.length==1){
                 if(strings[0].equalsIgnoreCase("reload")){
                     plugin.reloadConfig();
+                    PlayerData.reloadConfig();
+
                     commandSender.sendMessage("§3(Hopefully) Reloaded SkyClash config!");
+                    commandSender.sendMessage("§3(Hopefully) Reloaded PlayerData config!");
                 }
             }
         }

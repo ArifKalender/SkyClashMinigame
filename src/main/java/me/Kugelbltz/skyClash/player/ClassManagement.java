@@ -1,5 +1,6 @@
 package me.Kugelbltz.skyClash.player;
 
+import me.Kugelbltz.skyClash.playerdata.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -20,6 +21,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import static me.Kugelbltz.skyClash.SkyClash.plugin;
+import static me.Kugelbltz.skyClash.playerdata.PlayerData.PData;
+import static me.Kugelbltz.skyClash.playerdata.PlayerData.file;
 
 public class ClassManagement implements Listener {
 
@@ -69,11 +72,31 @@ public class ClassManagement implements Listener {
     @EventHandler
     private void joinEvent(PlayerJoinEvent event){
         event.getPlayer().setHealthScale(20);
+        PData.set("PlayerData.Players."+event.getPlayer().getUniqueId()+".Name",event.getPlayer().getName());
+        PlayerData.saveConfig();
+        String uuid = event.getPlayer().getUniqueId().toString();
+
+        if(PData.get("PlayerData.Players."+uuid+".Class")!=null){
+            String className = PData.getString("PlayerData.Players."+uuid+".Class");
+            if(className.equalsIgnoreCase("Speedster")){
+                playerClass.put(event.getPlayer(),PlayerClass.SPEEDSTER);
+            } else if (className.equalsIgnoreCase("Tank")) {
+                playerClass.put(event.getPlayer(),PlayerClass.TANK);
+            } else if (className.equalsIgnoreCase("Shatterman")) {
+                playerClass.put(event.getPlayer(),PlayerClass.SHATTERMAN);
+            }else {
+                plugin.getServer().getConsoleSender().sendMessage("§c[SkyClash] The player "+event.getPlayer().getName()+"'s class is invalid in the PlayerData.yml. UUID: "+uuid);
+            }
+        }
     }
 
     public static void openLexicon(Player player) {
         Inventory lex = Bukkit.createInventory(player, 27);
         ItemStack panel = new ItemStack(Material.GRAY_STAINED_GLASS_PANE, 1);
+        ItemMeta panelMeta = panel.getItemMeta();;
+        assert panelMeta != null;
+        panelMeta.setDisplayName("§7");
+        panel.setItemMeta(panelMeta);
         for (int i = 0; i < 27; i++) {
             lex.setItem(i, panel);
         }
@@ -117,26 +140,40 @@ public class ClassManagement implements Listener {
     private void inventoryClick(InventoryClickEvent event) {
         if (event.getClickedInventory() != null) {
             if (event.getCurrentItem() != null) {
+
+
                 if (event.getCurrentItem().getItemMeta() != null) {
                     if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§bSpeedster!")) {
                         event.setCancelled(true);
                         playerClass.put((Player) event.getWhoClicked(), PlayerClass.SPEEDSTER);
+                        savePlayerClass((Player)event.getWhoClicked(),"Speedster");
                     } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§aTank!")) {
                         event.setCancelled(true);
                         playerClass.put((Player) event.getWhoClicked(), PlayerClass.TANK);
+                        savePlayerClass((Player)event.getWhoClicked(),"Tank");
                     } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cShatterman!")) {
                         event.setCancelled(true);
                         playerClass.put((Player) event.getWhoClicked(), PlayerClass.SHATTERMAN);
-                    } else if (event.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("")) {
+                        savePlayerClass((Player)event.getWhoClicked(),"Shatterman");
+                    } else if (event.getCurrentItem().getItemMeta().getDisplayName().equals("§7")) {
                         event.setCancelled(true);
+                    }else{
+                        event.setCancelled(false);
                     }
                 }
+
+
+
+
             }
         }
     }
 
-    private void setPlayerClass(String playerName, String className){
+    private void savePlayerClass(Player player, String className){
 
+        String uuid = player.getUniqueId().toString();
+        PData.set("PlayerData.Players."+uuid+".Class",className);
+        PlayerData.saveConfig();
 
     }
 }
