@@ -17,6 +17,7 @@ public class SCAdmin implements CommandExecutor {
                 sendHelpMessage((Player) commandSender);
             }
 
+
         }else {
             if(strings.length==1){
                 if(strings[0].equalsIgnoreCase("reload")){

@@ -47,6 +47,7 @@ public final class SkyClash extends JavaPlugin {
         new PlayerData();
     }
 
+    
     @Override
     public void onDisable() {
         // Plugin shutdown logic
