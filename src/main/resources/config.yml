@@ -56,7 +56,7 @@ SkyClash:
           Flight:
             Duration: 3000
             Cooldown: 8000
-          AngyTank:
+          SculkArmor:
             Speed: 5
             Regeneration: 4
             Duration: 6000
