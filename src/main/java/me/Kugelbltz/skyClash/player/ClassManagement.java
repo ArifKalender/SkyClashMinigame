@@ -140,6 +140,7 @@ public class ClassManagement implements Listener {
     @EventHandler
     private void inventoryClick(InventoryClickEvent event) {
         if (event.getClickedInventory() != null) {
+            event.getWhoClicked().sendMessage(event.getSlot()+"");
             if (event.getCurrentItem() != null) {
 
 

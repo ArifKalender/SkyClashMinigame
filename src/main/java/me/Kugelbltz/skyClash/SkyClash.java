@@ -3,6 +3,7 @@ package me.Kugelbltz.skyClash;
 import me.Kugelbltz.skyClash.commands.*;
 import me.Kugelbltz.skyClash.commands.SCAdmin;
 import me.Kugelbltz.skyClash.player.ClassManagement;
+import me.Kugelbltz.skyClash.player.InventoryManagement;
 import me.Kugelbltz.skyClash.player.PlayerRegenerativeStats;
 import me.Kugelbltz.skyClash.player.CustomDamageHandler;
 import me.Kugelbltz.skyClash.playerdata.PlayerData;
@@ -30,6 +31,7 @@ public final class SkyClash extends JavaPlugin {
         ClassManagement.classTick();
         PlayerRegenerativeStats.displayPlayerStats();
         PlayerRegenerativeStats.regenerateStats();
+        new InventoryManagement();
 
         getServer().getPluginManager().registerEvents(new ClassManagement(),this);
         getServer().getPluginManager().registerEvents(new CustomDamageHandler(),this);

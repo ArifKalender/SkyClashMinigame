@@ -1,6 +1,7 @@
 package me.Kugelbltz.skyClash.player;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -12,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static me.Kugelbltz.skyClash.SkyClash.plugin;
+import static me.Kugelbltz.skyClash.player.ClassManagement.playerClass;
 
 public class InventoryManagement {
 
@@ -59,22 +61,61 @@ public class InventoryManagement {
         shatteringChargeMeta.setLore(Arrays.asList("","§6Usage: §eSNEAK + OFFHAND SWAP"));
         timeWarpMeta.setLore(Arrays.asList("","§6Usage: §eSNEAK + OFFHAND SWAP"));
         sculkArmorMeta.setLore(Arrays.asList("","§6Usage: §eSNEAK + OFFHAND SWAP"));
+        flightMeta.setLore(Arrays.asList("","§6Usage: §eSNEAK + LEFT CLICK"));
+        dashMeta.setLore(Arrays.asList("","§6Usage: §eLEFT CLICK"));
+        backDashMeta.setLore(Arrays.asList("","§6Usage: §eLEFT CLICK"));
+
+        cockroach.setItemMeta(cockroachMeta);
+        followingCharge.setItemMeta(cockroachMeta);
+        lineTimedCharge.setItemMeta(lineTimedChargeMeta);
+        turret.setItemMeta(turretMeta);
+        shatteringCharge.setItemMeta(shatteringChargeMeta);
+        timeWarp.setItemMeta(timeWarpMeta);
+        sculkArmor.setItemMeta(sculkArmorMeta);
+        flight.setItemMeta(flightMeta);
+        dash.setItemMeta(dashMeta);
+        backDash.setItemMeta(backDashMeta);
 
         new BukkitRunnable() {
             @Override
             public void run() {
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    fillWithAir(player.getInventory());
-
+                    if(player.getGameMode() != GameMode.CREATIVE){
+                        fillInventory(player.getInventory(),player);
+                    }
                 }
             }
         }.runTaskTimer(plugin, 0, 5);
     }
 
-    private void fillWithAir(Inventory inventory) {
+    private void fillInventory(Inventory inventory, Player player) {
         for (int i = 0; i < 27; i++) {
             inventory.setItem(i, new ItemStack(Material.AIR));
         }
-        inventory.setItem(31, new ItemStack(Material.AIR));
+        inventory.setItem(0,cockroach);
+        inventory.setItem(1,followingCharge);
+        inventory.setItem(2,lineTimedCharge);
+        inventory.setItem(3,turret);
+
+        inventory.setItem(4, new ItemStack(Material.AIR));
+
+        if(playerClass.get(player)!=null){
+            if(playerClass.get(player)==PlayerClass.SHATTERMAN){
+                if(inventory.getItem(5) != shatteringCharge)
+                inventory.setItem(5, shatteringCharge);
+            } else if (playerClass.get(player)==PlayerClass.SPEEDSTER) {
+                if(inventory.getItem(5) != timeWarp)
+                inventory.setItem(5, timeWarp);
+            } else if (playerClass.get(player)==PlayerClass.TANK) {
+                if(inventory.getItem(5) != sculkArmor)
+                inventory.setItem(5, sculkArmor);
+            }else {
+                if(inventory.getItem(5) != new ItemStack(Material.AIR))
+                inventory.setItem(5, new ItemStack(Material.AIR));
+
+            }
+        }else {
+            inventory.setItem(5, new ItemStack(Material.AIR));
+        }
     }
 }
