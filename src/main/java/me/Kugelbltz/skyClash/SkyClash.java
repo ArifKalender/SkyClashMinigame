@@ -21,7 +21,6 @@ public final class SkyClash extends JavaPlugin {
     * En son custom config dosyası yapıyordun
     * ve ClassManagement'ta setPlayerClass metotunu tamamlıyordun, bu metot
     * yeni config dosyasına oyuncunun classını yazacak veritabanı gibi.
-    * Postresql kullanabilirsin!!! MCCI bunu istiyor en azından
     *
     */
     public static Plugin plugin;
