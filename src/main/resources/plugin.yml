@@ -1,0 +1,18 @@
+name: SkyClash
+version: '1.0'
+main: me.Kugelbltz.skyClash.SkyClash
+api-version: '1.20'
+commands:
+  choose:
+    permission: skyclash.player.choose
+    description: '§3Allows you to choose your class'
+    aliases:
+      - chooseclass
+      - class
+  skyclashadmin:
+    permission: skyclash.admin.admin
+    description: '§3Admin command for SkyClash'
+    aliases:
+      - scadmin
+      - skyclash
+      - sca

@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="SkyClash">
+    <output-path>$USER_HOME$/Desktop/serverlar/Tester2/plugins</output-path>
+    <root id="archive" name="SkyClash.jar">
+      <element id="module-output" name="MiniBombMatch.main" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/config.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/main/resources/plugin.yml" />
+    </root>
+  </artifact>
+</component>

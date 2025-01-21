@@ -1,0 +1,63 @@
+SkyClash:
+  Player:
+    BaseMana: 100
+    BaseManaRegenPerSecond: 15
+    Classes:
+      ShatterMan:
+        Health: 100.0
+        DamageBuff: 1.1
+        Speed: 2
+        JumpBoost: 5
+        Abilities:
+          Dash:
+            Power: 2
+            Cooldown: 5000
+          BackDash:
+            Power: 1.5
+            Cooldown: 4000
+          Flight:
+            Duration: 3000
+            Cooldown: 5000
+          Scatter:
+            Damage: 4
+            Cooldown: 12000
+            Power: 1
+      Speedster:
+        Health: 90.0
+        DamageBuff: 1.0
+        Speed: 5
+        JumpBoost: 1
+        Abilities:
+          Dash:
+            Power: 3
+            Cooldown: 3000
+          BackDash:
+            Power: 2
+            Cooldown: 3000
+          Flight:
+            Duration: 3000
+            Cooldown: 5000
+          TimeWarp:
+            Damage: 2
+            Cooldown: 10000
+            Range: 12
+      Tank:
+        Health: 130
+        DamageBuff: 0.92
+        Speed: 1.5
+        JumpBoost: 1
+        Abilities:
+          Dash:
+            Power: 1
+            Cooldown: 2000
+          BackDash:
+            Power: 0.8
+            Cooldown: 2000
+          Flight:
+            Duration: 3000
+            Cooldown: 8000
+          AngyTank:
+            Speed: 5
+            Regeneration: 4
+            Duration: 6000
+            Cooldown: 22000
