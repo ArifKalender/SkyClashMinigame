@@ -55,13 +55,14 @@ public class PlayerRegenerativeStats {
 
                     int maxHealth = (int) player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue();
 
-                    if (player.getHealth() + (maxHealth / 20) < maxHealth) {
-                        player.setHealth(player.getHealth()+maxHealth/20);
-                    } else {
-                        player.setHealth(maxHealth);
+                    if (!player.isDead()) {
+                        if (player.getHealth() + (maxHealth / 20) < maxHealth) {
+                            player.setHealth(player.getHealth() + maxHealth / 20);
+                        } else {
+                            player.setHealth(maxHealth);
+                        }
+
                     }
-
-
                 }
             }
         }.runTaskTimer(plugin, 0, 20);
